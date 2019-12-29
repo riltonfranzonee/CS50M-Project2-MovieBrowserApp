@@ -1,8 +1,8 @@
 import React from 'react'
 import {Text, View, TextInput, StyleSheet, Button, FlatList, TouchableOpacity, Image} from 'react-native'
 
-import {fetchMovies} from '../api'
-import MoviesList from '../MoviesList'
+import {fetchMovies, fetchDetails} from '../api'
+import { Icon } from 'react-native-elements'
 
 
 export default class SearchScreen extends React.Component {
@@ -28,14 +28,18 @@ export default class SearchScreen extends React.Component {
       }
 
     render(){
+        const { navigate } = this.props.navigation
+        
         return(
             <View style={styles.container}>
                 <View style={styles.searchContainer}>
-                    <TextInput style={styles.searchForm} placeholder='Search for a movie' onChangeText={this.handleSubmitUpdate}/>
-                    <Button style={styles.btn} title='Submit' onPress={this.searchMovie}/>
+                    <TextInput style={[styles.searchForm, styles.textInput]} placeholder='Search for a movie' onChangeText={this.handleSubmitUpdate}/>
+                    <View style={styles.btn}>
+                        <TouchableOpacity  onPress={this.searchMovie}><Icon name='search' color='#fff'/></TouchableOpacity>
+                    </View>
                 </View>
                 <FlatList data={this.state.movies} renderItem={({item}) => (
-                    <TouchableOpacity style={styles.row}>
+                    <TouchableOpacity style={styles.row} onPress={() => navigate('MovieDetails', {movieId: item.imdbID})}>
                         <Image style={styles.image} source={{uri: item.Poster}}/>
                         <View style={styles.searchInfo}>
                             <Text style={styles.movieTitle}>{item.Title}</Text>
@@ -58,14 +62,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center',
         alignItems: 'center',
-        marginTop: 20
+        marginTop: 20,
+        borderWidth: .7,
+        borderRadius: 15,
+        borderColor: 'black',
+        fontSize: 20,
+        backgroundColor: '#ededed',
     },
     searchForm:{
-        borderWidth: .5,
-        borderRadius: 5,
-        borderColor: 'black',
-        width: 300,
-        height: 50
+        width: 320,
+        height: 50,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15
         
     },
     row: {
@@ -82,7 +90,20 @@ const styles = StyleSheet.create({
     },
     movieTitle:{
         fontWeight: 'bold',
-        marginBottom: 10
+        marginBottom: 10,
+        flexShrink: 1
+    },
+    btn:{
+        backgroundColor: '#1874CD',
+        height: 50,
+        width: 60,
+        justifyContent: 'center',
+        alignItems:'center',
+        borderBottomRightRadius: 15,
+        borderTopRightRadius: 15
+    },
+    textInput:{
+        marginLeft: 10
     }
 
 })

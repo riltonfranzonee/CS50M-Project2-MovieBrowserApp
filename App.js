@@ -3,13 +3,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import SearchScreen from './screens/SearchScreen'
-//import {MovieDetailsScreen} from './screens/MovieDetailsScreen'
+import MovieDetailsScreen from './screens/MovieDetailsScreen'
 
 import {fetchMovies} from './api'
 
 const AppNavigator = createStackNavigator({
   Search: SearchScreen,
- // MovieDetails: MovieDetailsScreen 
+  MovieDetails: MovieDetailsScreen 
 }, {initialRouteName: 'Search', navigationOptions: {
   headerTintColor: "#fff",
   headerStyle: {
