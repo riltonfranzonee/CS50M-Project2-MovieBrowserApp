@@ -39,10 +39,11 @@ export default class MovieDetailsScreen extends React.Component{
             <View style={styles.infoContainer}>
                     <View style={styles.rating}><Text style={[styles.quickInfo, styles.ratingText]}>Rating: {this.state.data.imdbRating}</Text></View>
                     <Text style={styles.quickInfo}>{this.state.data.Runtime}</Text>
-                    <Text style={styles.quickInfo}>{this.state.data.Genre}</Text>
+                    <Text style={styles.quickInfo}>{this.state.data.Language}</Text>
             </View>
             <View style={styles.plotContainer}>
                 <Text style={styles.plotText}>{this.state.data.Plot}</Text>
+                <View style={styles.moreDataContainer}><Text style={[styles.dataTitle, styles.quickInfo]}>Genre: </Text><Text style={[styles.quickInfo, styles.genre]}>{this.state.data.Genre}</Text></View>
             </View>
         </ScrollView>
         )
@@ -71,6 +72,11 @@ const styles = StyleSheet.create({
     plotContainer:{
         margin: 20,
         justifyContent:'center'
+    },
+    moreDataContainer:{
+        flexDirection: 'row',
+        marginTop: 20,
+        flexShrink: 1
     },
     poster:{
         marginTop: 7,
@@ -110,5 +116,8 @@ const styles = StyleSheet.create({
         flexShrink:1,
         fontSize: 18,
         fontStyle: 'italic'
+    },
+    dataTitle:{
+        fontWeight: 'bold'
     }
 })

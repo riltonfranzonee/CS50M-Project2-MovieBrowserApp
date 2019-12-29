@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     row: {
         padding: 20,
         flexDirection: 'row',
-        alignSelf: 'flex-start',
+        alignSelf: 'flex-start'
     },
     image:{
         width:50,
